@@ -1,5 +1,5 @@
 const HomeModel = require('../models/ModelHome')
 
-exports.homeController = (req, res) => {
+exports.index = (req, res) => {
     res.render('index')
 }

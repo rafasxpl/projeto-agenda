@@ -24,9 +24,9 @@ app.set('views', path.resolve(__dirname, "src", "views"))
 
 app.use(express.static(path.resolve(__dirname, "public")))
 
-app.use(insertCsrfToken)
+// app.use(insertCsrfToken)
 app.use(routes)
-app.use(checkCsrfToken)
+// app.use(checkCsrfToken)
 
 app.on('ready', () => {
     app.listen(process.env.PORT, () => {
