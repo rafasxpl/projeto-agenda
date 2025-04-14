@@ -2,14 +2,17 @@ const express = require('express')
 const router = express.Router()
 const {checkCsrfToken} = require('./src/middlewares/global')
 
-const homeController = require('./src/controllers/homeController')
+const homeController = require('./src/controllers/ControllerHome')
 const loginController = require('./src/controllers/ControllerAccount')
 
-router.get('/', homeController.index)
+router.get('/', homeController.validateLogin, homeController.index)
 
 // ROUTES FOR "login" AND "createAccount" PAGES
-router.get('/account/login', loginController.renderLogin)
-router.get('/account/createAccount', loginController.renderCreateAccount)
+router.get('/account', loginController.renderLogin)
+router.get('/account/login', loginController.validateLogin, loginController.renderLogin)
+router.get('/account/createAccount', loginController.validateLogin, loginController.renderCreateAccount)
+router.get('/account/logout', loginController.logout)
+
 
 // ROUTES FOR POST "createAccount" AND "login"
 router.post('/account/login', loginController.login)

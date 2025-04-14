@@ -3,5 +3,6 @@ const flash = require('connect-flash')
 exports.errors = (req, res, next) => {
     res.locals.errors = req.flash('errors') || [];
     res.locals.success = req.flash('success') || [];
+    res.locals.contacts = []
     next();
 }

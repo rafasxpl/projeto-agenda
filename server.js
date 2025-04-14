@@ -9,7 +9,7 @@ const flash = require('connect-flash')
 const helmet = require('helmet')
 const session = require('express-session')
 const MongoStore = require('connect-mongo');
-const {insertCsrfToken, checkCsrfToken, errors} = require('./src/middlewares/global')
+const {errors} = require('./src/middlewares/global')
 const sessionConfig = require('./src/session/sessionConfig')
 
 connectionDatabase(app);

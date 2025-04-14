@@ -1,6 +1,5 @@
-const Account = require('../models/ModelAccount')
 const flash = require('connect-flash')
-const {register} = require('../models/ModelAccount')
+const {register, login, decryptPassword} = require('../models/ModelAccount')
 
 exports.renderLogin = (req, res, next) => {
     res.render('login')
@@ -14,16 +13,51 @@ exports.createAccount = async (req, res, next) => {
     const result = await register(req.body)
 
     if(!result.success) {
-        req.flash('errors', result.errors)
-
-        return req.session.save(() => res.redirect('/account/createAccount'))
+        return req.session.save(() => {    
+            req.flash('errors', result.errors)
+            return res.redirect('/account/createAccount')
+        })
     }
 
-    res.redirect('/account/login')
+    req.session.save(() => {
+        req.flash('success', result.message)
+        res.redirect('/account/login')
+    })
 }
 
-exports.login = (req, res, next) => {
+exports.validateLogin = (req, res, next) => {
+    console.log(req.session.login);
+    if(req.session.login) {
+        return res.redirect('/')
+    }
     
+    return next()
+}
+
+exports.logout = (req, res, next) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.log('Erro ao destruir a sessão:', err);
+            return res.status(500).send('Erro ao encerrar a sessão.');
+        }
+        res.redirect('/account/login');
+    });
+}
+
+exports.login = async (req, res, next) => {
+    try {
+        const result = await login(req.body)
+        console.log(result.success);
+    
+        if(result.success) {
+            return req.session.save(() => {
+                req.session.login = true
+                res.redirect('/')
+            })
+        }
+    } catch(e) {
+        console.log(e);
+    }
 }
 
 exports.sla = (req, res, next) => {
