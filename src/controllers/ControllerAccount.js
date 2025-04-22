@@ -1,5 +1,5 @@
 const flash = require('connect-flash')
-const {register, login, decryptPassword} = require('../models/ModelAccount')
+const { register, login, decryptPassword } = require('../models/ModelAccount')
 
 exports.renderLogin = (req, res, next) => {
     res.render('login')
@@ -26,7 +26,6 @@ exports.createAccount = async (req, res, next) => {
 }
 
 exports.validateLogin = (req, res, next) => {
-    console.log(req.session.login);
     if(req.session.login) {
         return res.redirect('/')
     }

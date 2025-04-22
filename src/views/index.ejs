@@ -3,72 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../public/assets/css/style.css">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline';">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <style>
-      button {
-        border: none;
-        padding: 6px 10px;
-        border-radius: 7px;
-        background: #f82e2e;
+      body {
+        background: #ffefb5;
+      }
+      .edit {
+        background: #59bd32;
+
+        & a {
+          text-decoration: none;
+          color: white
+        }
       }
 
-      header {
-        display: flex;
-        justify-content: end;
-        align-items: center;
-        padding-right: 1em;
-        margin-top: 1em;
+      .delete {
+        background: #f13636;
+        color: white;
+
+        & a {
+          text-decoration: none;
+          color: white
+        }
       }
     </style>
     <title>Sla</title>
 </head> 
-<body>  
-  <header>
-    <form action="/account/logout" method="get" class="loggout">
-      <button type="submit">Logout</button>
-    </form>
-  </header>
+<body>
+  <%- include('./header/header.ejs') %>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto my-3">
                 <h1 class="text-center">Contatos</h1>
+                  <%- include('../include-views/sucess.ejs') %>
+                  <%- include('../include-views/error.ejs') %>
                 <div class="contatos">
                     <table class="table">
                         <thead>
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">telefone</th>
+                            <th scope="col">E-mail</th>
+                            <th scope="col">Editar</th>
+                            <th scope="col">Apagar</th>
                           </tr>
                         </thead>
                         <tbody>
+                          <% if(contacts.length == 0) { %>
                           <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                              <td colspan="6" class="text-center">Sem contatos...</td>
                           </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td>John</td>
-                            <td>Doe</td>
-                            <td>@social</td>
-                          </tr>
+                          <% } else { %>
+                              <% contacts.forEach((element, index) => { %>
+                              <tr>
+                                  <th scope="row"><%= index %></th>
+                                  <td><%= element.name + " " + element.lastName %></td>
+                                  <td><%= element.cellPhone %></td>
+                                  <td><%= element.email %></td>
+                                  <td>
+                                      <button class="edit">
+                                          <a href="/contacts/update/<%=element._id%>">Editar</a>
+                                      </button>
+                                  </td>
+                                  <td>
+                                      <button class="delete">
+                                          <a href="/contacts/delete/<%=element._id%>">Excluir</a>
+                                      </button>
+                                  </td>
+                              </tr>
+                              <% }) %>
+                          <% } %>
                         </tbody>
                       </table>
                 </div>
             </div>
         </div>      
     </div>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./assets/js/bundle.js"></script>
+
+  <script src="./assets/js/bundle.js"></script>
 </body>
 </html>

@@ -17,7 +17,7 @@ A função `set` é usada para definir configurações, ela aceita dois argument
 
 No caso das views, definimos qual engine usar e onde estão localizadas os arquivos das views.
 
-Dentro da pasta *src/views* podemos criar arquivos com a extensão `.ejs` e escrever htmld dentro deles.
+Dentro da pasta *src/views* podemos criar arquivos com a extensão `.ejs` e escrever html dentro deles.
 
 Caso queiramos renderiza-los em alguma controller, podemos usar a função `render()` para isso:
 ```js

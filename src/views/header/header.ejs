@@ -1,0 +1,53 @@
+<style>
+    button {
+        border: none;
+        padding: 6px 10px;
+        border-radius: 7px;
+        background-color: transparent;
+        color: white;
+    }
+
+    header {
+        background: #260d0d;
+        padding: 0.5em 0;
+        margin-top: 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding-right: 1em;
+    }
+
+    .second-part {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+
+        & a {
+            text-decoration: none;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 10px;
+        }
+    }
+
+    .header-title {
+        font-size: 2em;
+        text-decoration: none;
+        color: white;
+    }
+
+    a {
+        color: white;
+    }
+</style>
+<header>
+    <a href="/" class="header-title">Agenda</a>
+    <div class="second-part">
+        <form action="/account/logout" method="get" class="loggout">
+          <button type="submit">Logout</button>
+        </form>
+        <div class="registerContacts">
+            <a href="/contacts">Cadastrar contatos</a>
+        </div>
+    </div>
+</header>

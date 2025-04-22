@@ -4,7 +4,7 @@ const connectionDatabase = require("./src/database/databaseConfig")
 const express = require('express')
 const app = express()
 const path = require('path')
-const routes = require('./routes')
+const routes = require('./src/routes/routes')
 const flash = require('connect-flash')
 const helmet = require('helmet')
 const session = require('express-session')
@@ -34,7 +34,8 @@ app.use(helmet())
 app.set('view engine', 'ejs')
 app.set('views', [
     path.resolve(__dirname, "src", "views"),
-    path.resolve(__dirname, "src", "views", "account")
+    path.resolve(__dirname, "src", "views", "account"),
+    path.resolve(__dirname, "src", "views", "contacts")
 ])
 
 app.use(express.static(path.resolve(__dirname, "public")))

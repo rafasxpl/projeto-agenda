@@ -1,4 +1,5 @@
 const moongose  = require('mongoose')
+const { ContactModel } = require('./ModelContacts')
 
 const HomeSchema = new moongose.Schema({
     nome: {type: String, required: true},
@@ -7,4 +8,6 @@ const HomeSchema = new moongose.Schema({
 
 const HomeModel = moongose.model('Home', HomeSchema)
 
-module.exports = HomeModel
+exports.getAllContacts = async (req, res, next) => {
+    return await ContactModel.find({})
+}
