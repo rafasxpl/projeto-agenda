@@ -29,6 +29,7 @@ app.set('views', [
 app.use(express.static(path.resolve(__dirname, "public")))
 
 app.use(errors)
+app.use('/.netlify/functions/', routes)
 app.use(routes)
 
 app.on('ready', () => {
