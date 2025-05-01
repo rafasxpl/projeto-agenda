@@ -6,3 +6,11 @@ exports.errors = (req, res, next) => {
     res.locals.contacts = []
     next();
 }
+
+exports.validateLogin = (req, res, next) => {
+    if(!req.session.login) {
+        return res.redirect('/account/login')
+    }
+
+    return next()
+}
